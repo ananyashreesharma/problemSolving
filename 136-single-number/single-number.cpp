@@ -1,10 +1,11 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-       int n=0;
-        for(auto num: nums){
-            n^=num;
-        }
-        return n;
+      int xorres=0;
+      for(int i=0;i<nums.size();i++){
+      xorres=xorres^nums[i];
     }
+    return xorres;
+    }
+    
 };
