@@ -12,17 +12,14 @@ public:
     //     }
     //    int ans=xor1^xor2;
     //    return ans;
-     int n = nums.size();
-    int sum1 = n * (n + 1) / 2;
-    int sum2 = 0;
-
-    // Calculate the sum of elements in nums
-    for (int num : nums) {
-        sum2 += num;
+    int n=nums.size();
+    int sum1=n*(n+1)/2;
+    int sum2=0;
+    for(int i=0;i<n;i++)
+    {
+        sum2=sum2+nums[i];
     }
-
-    // Calculate the missing number
-    return sum1 - sum2;
+    return sum1-sum2;
 }
 
    
