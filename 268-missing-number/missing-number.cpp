@@ -13,15 +13,13 @@ public:
     //     }
     //    int ans=xor1^xor2;
     //    return ans;
-     int missing = nums.size(); // Initialize missing as the last index
+   int n=nums.size();
+   int xor1=n;
+   for(int i=0;i<n;i++){
+    xor1=xor1^i^nums[i];
 
-    // XOR all elements and indices
-    for (int i = 0; i < nums.size(); i++) {
-        missing ^= i ^ nums[i];
-    }
-
-    return missing;
-
+   }
+ return xor1;
        
     }
 };
