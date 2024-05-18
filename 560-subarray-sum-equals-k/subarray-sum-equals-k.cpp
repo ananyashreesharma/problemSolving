@@ -10,8 +10,6 @@ public:
         int  rem=sum-k;
         count=count+mp[rem];
         mp[sum]=mp[sum]+1;
-
-
       }
       return count;
     }
