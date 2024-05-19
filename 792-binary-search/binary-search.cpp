@@ -1,19 +1,24 @@
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
-        int low=0;
-        int high=nums.size()-1;
-        int mid=0;
-        int n=nums.size();
-        while(low<=high){
-            int mid=(low+high)/2;
-            if(nums[mid]==target)
-            return mid;
-            else if(nums[mid]<target)
-            low=mid+1;
-            else 
-            high=mid-1;
-        }
-        return -1;
+
+int recursiveBinarySearch(const std::vector<int>& arr, int target, int low, int high) {
+    if (low > high) {
+        return -1; // Target not found
+    }
+    
+    int mid = low + (high - low) / 2; // To avoid overflow
+    
+    if (arr[mid] == target) {
+        return mid; // Target found
+    } else if (arr[mid] < target) {
+        return recursiveBinarySearch(arr, target, mid + 1, high); // Search in the right half
+    } else {
+        return recursiveBinarySearch(arr, target, low, mid - 1); // Search in the left half
+    }
+}
+
+    int search(vector<int>& arr, int target) {
+       int result = recursiveBinarySearch(arr, target, 0, arr.size() - 1);
+       return result;
     }
 };
