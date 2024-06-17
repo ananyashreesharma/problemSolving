@@ -1,38 +1,46 @@
 class Solution {
 public:
-    int findMax(vector<int> &v) {
-    int maxi = INT_MIN;
-    int n = v.size();
-    for (int i = 0; i < n; i++) {
-        maxi = max(maxi, v[i]);
-    }
-    return maxi;
-}
-
-double calculateTotalHours(vector<int> &v, int hourly) {
-    double totalH = 0;
-    double n = v.size();
-    for (int i = 0; i < n; i++) {
-        totalH += ceil((double)(v[i]) / (double)(hourly));
-    }
-    return totalH;
-}
-
-int minEatingSpeed(std::vector<int> v, int h) {
-    int low = 1, high = findMax(v); // Initialize low to 1 and high to the maximum value in the vector
-
-    // Binary search for the minimum eating speed
-    while (low <= high) {
-        double mid = (low + high) / 2; // Calculate the mid-point speed
-        double totalH = calculateTotalHours(v, mid); // Calculate total hours needed at this speed
+   int maxi(vector<int>& piles){
+     int maxi=INT_MIN;
+        for(int i=0;i<piles.size();i++){
+            maxi=max(maxi,piles[i]);
+       
         
-        if (totalH <= h) {
-            high = mid - 1; // If total hours is less than or equal to h, search the lower half
-        } else {
-            low = mid + 1; // If total hours is greater than h, search the upper half
-        }
-    }
 
-    return low; // The lowest speed at which the task can be completed within h hours
-}
+        } 
+        return maxi;
+    }
+   double total(vector<int>& piles, int hours){
+    double ans=0;
+    double n=piles.size();
+        for(int i=0;i<n;i++){
+            ans+=ceil((double)piles[i]/hours);
+        }
+        return ans;
+    }
+    int minEatingSpeed(vector<int>& piles, int h) {
+     int l=1,r=maxi(piles);
+       int result=r;
+        while(l<=r){
+          double mid=l+(r-l)/2;
+           double t=total(piles,mid);
+        //    if(t==h){
+        //     return mid;
+        //    }
+        //    else 
+          if(t<=h){
+            result=mid;
+            r=mid-1;
+           }
+           else{
+            l=mid+1;
+           }
+        }
+        return result;
+
+
+
+       
+
+    }
 };
