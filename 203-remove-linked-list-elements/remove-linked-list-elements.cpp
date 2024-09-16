@@ -11,33 +11,32 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        // Handle edge case: removing the head node if its value is equal to 'val'
-        while (head != nullptr && head->val == val) {
-            ListNode* temp = head;  // Store the current head node
-            head = head->next;      // Move the head to the next node
-            delete temp;            // Delete the old head node
-        }
-
-        // If the list becomes empty after removing all matching head nodes
-        if (head == nullptr) {
+       
+        if(head==nullptr ){
             return head;
         }
-
-        ListNode* temp = head;
-        ListNode* prev = nullptr;
-
-        // Traverse the list starting from the current head
-        while (temp != nullptr) {
-            if (temp->val == val) {
-                prev->next = temp->next;  // Skip the current node
-                delete temp;              // Delete the node with value == val
-                temp = prev->next;        // Move to the next node
-            } else {
-                prev = temp;              // Move prev to current node
-                temp = temp->next;        // Move temp to the next node
-            }
+        while(head!=nullptr and head->val==val ){
+              ListNode* temp=head;
+            head=head->next;
+            delete temp;
         }
-
-        return head;  // Return the new head of the list
+          ListNode* temp=head;
+        ListNode* prev=nullptr;
+        while(temp!=nullptr){
+         
+            if(temp->val==val){
+                prev->next=temp->next;
+                
+                delete temp;
+                temp=prev->next;
+            }
+            else{
+                 prev=temp;
+                temp=temp->next;
+            }
+            
+            
+        }
+        return head;
     }
 };
