@@ -4,7 +4,7 @@ public:
       int n = s.length();
     vector<int> diff(n + 1, 0);
 
-    for (const auto& shift : shifts) {
+    for (auto shift : shifts) {
         int start = shift[0], end = shift[1], direction = shift[2];
         diff[start] += (direction == 1 ? 1 : -1);
         diff[end + 1] -= (direction == 1 ? 1 : -1);
