@@ -12,7 +12,7 @@ public:
 
     int shiftValue = 0;
     for (int i=0;i<n;i++) {
-        shiftValue +=diff[i];
+        shiftValue= shiftValue+diff[i];
         int newChar =((s[i] - 'a') + shiftValue) % 26;
         if (newChar <0) newChar += 26;
         s[i] = 'a'+newChar;
