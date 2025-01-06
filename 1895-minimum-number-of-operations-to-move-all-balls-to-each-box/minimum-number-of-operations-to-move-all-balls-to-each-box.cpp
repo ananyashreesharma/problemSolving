@@ -6,8 +6,8 @@ public:
     int n = boxes.size();
     vector<int> answer(n, 0);
 
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
             if (boxes[j] == '1') {
                 answer[i] += abs(i - j);
             }
