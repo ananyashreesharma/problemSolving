@@ -2,9 +2,9 @@ class Solution {
 public:
     vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
         vector<int> maxRequired(26, 0); 
-    for (string word : words2) {
+    for (string i : words2) {
         vector<int> count(26, 0);
-        for (char c : word) {
+        for (char c : i) {
             count[c - 'a']++; 
         }
         for (int i = 0; i < 26; i++) {
@@ -12,9 +12,9 @@ public:
         }
     }
     vector<string> result;
-    for (string word : words1) {
+    for (string i : words1) {
         vector<int> count(26, 0);
-        for (char c : word) {
+        for (char c : i) {
             count[c - 'a']++; }
         bool isUni= 1;
         for (int i = 0; i < 26; i++) {
@@ -24,7 +24,7 @@ public:
             }
         }
         if (isUni) {
-            result.push_back(word);
+            result.push_back(i);
         }
     }
 
