@@ -1,29 +1,22 @@
 class Solution {
 public:
-    vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
-      int n = A.size();
-    vector<int> prefixCommonArray(n, 0);  // Result array to store common counts for each prefix
-    vector<int> frequencyArray(n + 1, 0);  // Frequency array for numbers 1 to n
-    int commonCount = 0;  // Counter for common elements
-
-    for (int currentIndex = 0; currentIndex < n; ++currentIndex) {
-        // Process A[currentIndex]
-        frequencyArray[A[currentIndex]]++;
-        if (frequencyArray[A[currentIndex]] == 2) {
-            commonCount++;  // This element is common in both A and B
-        }
-
-        // Process B[currentIndex]
-        frequencyArray[B[currentIndex]]++;
-        if (frequencyArray[B[currentIndex]] == 2) {
-            commonCount++;  // This element is common in both A and B
-        }
-
-        // Store the common count at the current index
-        prefixCommonArray[currentIndex] = commonCount;
+    vector<int> findThePrefixCommonArray(vector<int>& a, vector<int>& b) {
+     vector<int> ans;
+     int n=a.size();
+     int count=0;
+     vector<int> freqarr(n+1,0);
+    ;
+    for(int i=0;i<n;i++){
+    freqarr[a[i]]++;
+    if(freqarr[a[i]]==2){
+    count++;
     }
-
-    return prefixCommonArray;
-
+    freqarr[b[i]]++;
+    if(freqarr[b[i]]==2){
+    count++;
+    }
+    ans.push_back(count);
+    }
+    return ans;
     }
 };
