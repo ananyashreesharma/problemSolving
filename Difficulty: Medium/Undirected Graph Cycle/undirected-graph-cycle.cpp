@@ -10,54 +10,63 @@ using namespace std;
 
 class Solution {
 public:
-    // start se BFS karke cycle detect karo
-    bool detect(int start, vector<vector<int>>& adj, vector<int>& visited) {
-        queue<pair<int,int>> q;
-        visited[start] = 1;            // mark visited
-        q.push({start, -1});           // {node, parent}
+    // // start se BFS karke cycle detect karo
+    // bool detect(int start, vector<vector<int>>& adj, vector<int>& visited) {
+    //     queue<pair<int,int>> q;
+    //     visited[start] = 1;            // mark visited
+    //     q.push({start, -1});           // {node, parent}
 
-        while (!q.empty()) {
-            auto p = q.front(); q.pop();
-            int node   = p.first;
-            int parent = p.second;
+    //     while (!q.empty()) {
+    //         auto p = q.front(); q.pop();
+    //         int node   = p.first;
+    //         int parent = p.second;
 
-            // saare neighbours dekhlo
-            for (int nei : adj[node]) {
-                if (!visited[nei]) {
-                    visited[nei] = 1;    // ab visit mark karo
-                    q.push({nei, node}); // enqueue karo with parent
-                }
-                else if (nei != parent) {
-                    // visited hai aur parent nahi hai ⇒ cycle mil gaya
+    //         // saare neighbours dekhlo
+    //         for (int nei : adj[node]) {
+    //             if (!visited[nei]) {
+    //                 visited[nei] = 1;    // ab visit mark karo
+    //                 q.push({nei, node}); // enqueue karo with parent
+    //             }
+    //             else if (nei != parent) {
+    //                 // visited hai aur parent nahi hai ⇒ cycle mil gaya
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;  // poori component me cycle nahi mili
+    // }
+    bool dfsdetect(int node,
+                   int parent,
+                   vector<vector<int>>& adj,
+                   vector<int>& vis) {
+        vis[node] = 1;
+        for (int nei : adj[node]) {
+            if (!vis[nei]) {
+                if (dfsdetect(nei, node, adj, vis))
                     return true;
-                }
+            }
+            else if (nei != parent) {
+                return true;
             }
         }
-        return false;  // poori component me cycle nahi mili
+        return false;
     }
 
-    // edges vector of pairs di hui hai (0-based indexing)
     bool isCycle(int V, vector<vector<int>>& edges) {
-        // pehle adjacency list banao
         vector<vector<int>> adj(V);
         for (auto &e : edges) {
-            int u = e[0];
-            int v = e[1];
-            // seedha zero-based use karo, koi -1 conversion nahi
-            adj[u].push_back(v);
-            adj[v].push_back(u);
+            adj[e[0]].push_back(e[1]);
+            adj[e[1]].push_back(e[0]);
         }
 
-        // visited array har test-case me fresh banega kyunki main() har call pe naya Solution object banata hai
         vector<int> visited(V, 0);
-
-        // disconnected components ke liye loop
         for (int i = 0; i < V; ++i) {
-            if (!visited[i] && detect(i, adj, visited))
-                return true;   // cycle milte hi true
+            if (!visited[i] && dfsdetect(i, -1, adj, visited))
+                return true;
         }
-        return false;  // kahin bhi cycle nahi mili
+        return false;
     }
+
 };
 
 
